@@ -23,5 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 
-ProfilePage.jsx
-**/ProfilePage.jsx
+package-lock.json
