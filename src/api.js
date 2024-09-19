@@ -17,7 +17,6 @@ export const getArticles = (sortBy = "created_at", order = "desc") => {
     })
     .catch((err) => {
       console.error(err);
-      throw err;
     });
 };
 export const getArticleById = (id) => {
@@ -28,7 +27,6 @@ export const getArticleById = (id) => {
     })
     .catch((err) => {
       console.error(err);
-      throw err;
     });
 };
 
@@ -40,7 +38,6 @@ export const getCommentsByArticleId = (articleId) => {
     })
     .catch((err) => {
       console.error(err);
-      throw err;
     });
 };
 
@@ -55,7 +52,6 @@ export const postCommentToArticle = (articleId, username, body) => {
     })
     .catch((err) => {
       console.error(err);
-      throw err;
     });
 };
 
@@ -69,6 +65,20 @@ export const patchArticleVotes = (articleId, incVotes) => {
     })
     .catch((err) => {
       console.error(err);
+    });
+};
+
+export const patchCommentVotes = (article_id, commentId, voteChange) => {
+  return endpoints
+    .patch(`/articles/${article_id}/comments/${commentId}`, {
+      inc_votes: voteChange,
+    })
+    .then((response) => {
+      console.log("hit in api.js");
+      return response.data;
+    })
+    .catch((err) => {
+      console.error("Error in patchCommentVotes API call:", err);
       throw err;
     });
 };
@@ -81,7 +91,6 @@ export const deleteCommentById = (commentId) => {
     })
     .catch((err) => {
       console.error(err);
-      throw err;
     });
 };
 
@@ -93,6 +102,5 @@ export const getUsers = () => {
     })
     .catch((err) => {
       console.error(err);
-      throw err;
     });
 };
