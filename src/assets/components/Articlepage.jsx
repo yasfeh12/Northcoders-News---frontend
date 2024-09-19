@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Spinner from "react-bootstrap/Spinner";
 
+let username = "butter_bridge";
 const Articlepage = () => {
   const { articles_id } = useParams();
   const [article, setArticle] = useState(null);

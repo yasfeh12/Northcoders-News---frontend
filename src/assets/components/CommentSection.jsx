@@ -4,11 +4,14 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Spinner from "react-bootstrap/Spinner";
 import Alert from "react-bootstrap/Alert";
+import AddCommentForm from "./CommentForm";
+import VoteButton from "./VoteButton";
 
 const CommentSection = ({ article_id }) => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   useEffect(() => {
     if (article_id) {
       console.log("Fetching data for article ID:", article_id);
@@ -51,12 +54,17 @@ const CommentSection = ({ article_id }) => {
   return (
     <Container className="mt-4">
       <h4 className="mt-4">Comments</h4>
+      <AddCommentForm />
       {comments.length > 0 ? (
         comments.map((comment) => (
           <Card key={comment.comment_id} className="mt-3">
             <Card.Body>
               <Card.Text>{comment.body}</Card.Text>
               <small className="text-muted d-block">By {comment.author}</small>
+              <VoteButton
+                comment_id={comment.comment_id}
+                initialVotes={comment.votes}
+              />
             </Card.Body>
           </Card>
         ))
