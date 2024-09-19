@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import { patchCommentVotes } from "../../api";
 
-const VoteButton = ({ comment_id, initialVotes }) => {
+const VoteButton = ({ article_id, comment_id, initialVotes }) => {
   const [votes, setVotes] = useState(initialVotes);
   const [error, setError] = useState(null);
 
   const handleUpvote = () => {
-    patchCommentVotes(comment_id, 1)
+    patchCommentVotes(article_id, comment_id, 1)
       .then(() => {
         setVotes((prevVotes) => prevVotes + 1);
       })
