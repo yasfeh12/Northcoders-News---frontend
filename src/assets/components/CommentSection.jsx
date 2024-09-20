@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getCommentsByArticleId } from "../../api";
+import { getCommentsByArticleId, deleteCommentById } from "../../api";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Spinner from "react-bootstrap/Spinner";
 import Alert from "react-bootstrap/Alert";
+import Button from "react-bootstrap/Button";
 import AddCommentForm from "./CommentForm";
 import VoteButton from "./VoteButton";
 
@@ -11,6 +12,8 @@ const CommentSection = ({ article_id }) => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const loggedInUser = "jessjelly";
 
   useEffect(() => {
     if (article_id) {
@@ -28,9 +31,26 @@ const CommentSection = ({ article_id }) => {
     }
   }, [article_id]);
 
-  // Function to add the new comment to the existing list
   const addNewComment = (newComment) => {
     setComments((prevComments) => [...prevComments, newComment]);
+  };
+
+  const handleDeleteComment = (comment_id) => {
+    if (isDeleting) return;
+
+    setIsDeleting(true);
+
+    deleteCommentById(comment_id)
+      .then(() => {
+        setComments((prevComments) =>
+          prevComments.filter((comment) => comment.comment_id !== comment_id)
+        );
+        setIsDeleting(false);
+      })
+      .catch((err) => {
+        console.error("Error deleting comment:", err);
+        setIsDeleting(false);
+      });
   };
 
   if (loading) {
@@ -65,6 +85,16 @@ const CommentSection = ({ article_id }) => {
                 comment_id={comment.comment_id}
                 initialVotes={comment.votes}
               />
+              {comment.author === loggedInUser && (
+                <Button
+                  variant="danger"
+                  className="mt-2"
+                  disabled={isDeleting}
+                  onClick={() => handleDeleteComment(comment.comment_id)}
+                >
+                  {isDeleting ? "Deleting..." : "Delete"}
+                </Button>
+              )}
             </Card.Body>
           </Card>
         ))
