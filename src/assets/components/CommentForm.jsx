@@ -4,29 +4,44 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 
-let username = "butter_bridge";
-
-const AddCommentForm = ({ article_id }) => {
+const AddCommentForm = ({ article_id, addNewComment }) => {
   const [commentBody, setCommentBody] = useState("");
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleAddComment = (event) => {
     event.preventDefault();
+
+    if (isSubmitting) return;
+
     if (commentBody.trim() === "") {
       setError("Comment cannot be empty.");
       return;
     }
 
-    postCommentToArticle(article_id, username, commentBody)
+    console.log("Submitting comment to article:", article_id);
+
+    setIsSubmitting(true);
+
+    postCommentToArticle(article_id, "jessjelly", commentBody)
       .then((newComment) => {
+        console.log("Comment successfully added:", newComment);
+        addNewComment(newComment);
         setSuccessMessage("Comment added successfully!");
         setCommentBody("");
         setError(null);
       })
       .catch((err) => {
-        setError("Error adding comment: " + err.message);
+        console.error("Error adding comment:", err);
+        setError(
+          "Error adding comment: " +
+            (err.response ? err.response.data.msg : err.message)
+        );
         setSuccessMessage(null);
+      })
+      .finally(() => {
+        setIsSubmitting(false);
       });
   };
 
@@ -47,8 +62,13 @@ const AddCommentForm = ({ article_id }) => {
             onChange={(e) => setCommentBody(e.target.value)}
           />
         </Form.Group>
-        <Button type="submit" variant="primary" className="mt-2">
-          Add Comment
+        <Button
+          type="submit"
+          variant="primary"
+          className="mt-2"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Adding Comment..." : "Add Comment"}
         </Button>
       </Form>
     </div>
