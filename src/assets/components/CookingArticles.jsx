@@ -6,15 +6,18 @@ import Spinner from "react-bootstrap/Spinner";
 import Alert from "react-bootstrap/Alert";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Link } from "react-router-dom";
-const username = "jessjelly";
+import { Link, useSearchParams } from "react-router-dom";
+import SortArticles from "./SortedArticles";
+
 const CookingArticles = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchParams] = useSearchParams();
 
-  useEffect(() => {
-    getArticles()
+  const fetchSortedArticles = (sortBy = "created_at", order = "desc") => {
+    setLoading(true);
+    getArticles(sortBy, order)
       .then((data) => {
         const cookingArticles = data.filter(
           (article) => article.topic === "cooking"
@@ -26,7 +29,13 @@ const CookingArticles = () => {
         setError(err);
         setLoading(false);
       });
-  }, []);
+  };
+
+  useEffect(() => {
+    const sortBy = searchParams.get("sort_by") || "created_at";
+    const order = searchParams.get("order") || "desc";
+    fetchSortedArticles(sortBy, order);
+  }, [searchParams]);
 
   if (loading) {
     return (
@@ -47,6 +56,9 @@ const CookingArticles = () => {
   return (
     <Container className="mt-4">
       <h2>Cooking Articles</h2>
+
+      <SortArticles fetchSortedArticles={fetchSortedArticles} />
+
       {articles.length > 0 ? (
         <Row className="gy-4">
           {articles.map((article) => (
