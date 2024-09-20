@@ -3,7 +3,9 @@ import Home from "./Home";
 import Articlepage from "./Articlepage";
 import UserPage from "../../Userpage";
 import ProfilePage from "./ProfilePage";
-
+import CookingArticles from "./CookingArticles";
+import FootballArticles from "./FootballArticles";
+import CodingArticles from "./CodingArticles";
 function ListOfRoutes() {
   return (
     <Routes>
@@ -13,8 +15,10 @@ function ListOfRoutes() {
       <Route
         path="/profile"
         element={<ProfilePage loggedInUsername="butter_bridge" />}
-      />{" "}
-      {/* Replace with dynamic user when can get it to load the correct details.*/}
+      />
+      <Route path="/cooking" element={<CookingArticles />} />
+      <Route path="/Football" element={<FootballArticles />} />
+      <Route path="/Coding" element={<CodingArticles />} />
     </Routes>
   );
 }

@@ -14,25 +14,26 @@ const CommentSection = ({ article_id }) => {
 
   useEffect(() => {
     if (article_id) {
-      console.log("Fetching data for article ID:", article_id);
       setLoading(true);
 
       getCommentsByArticleId(article_id)
         .then((commentsData) => {
-          console.log("Comments Data:", commentsData);
           setComments(commentsData);
           setLoading(false);
         })
         .catch((err) => {
-          console.error("Error fetching comments:", err);
           setError(err);
           setLoading(false);
         });
     }
   }, [article_id]);
 
+  // Function to add the new comment to the existing list
+  const addNewComment = (newComment) => {
+    setComments((prevComments) => [...prevComments, newComment]);
+  };
+
   if (loading) {
-    console.log("Loading...");
     return (
       <div className="text-center">
         <Spinner animation="border" role="status">
@@ -43,7 +44,6 @@ const CommentSection = ({ article_id }) => {
   }
 
   if (error) {
-    console.log("Error encountered:", error);
     return (
       <Alert variant="danger">
         Error fetching the comments: {error.message}
@@ -54,7 +54,7 @@ const CommentSection = ({ article_id }) => {
   return (
     <Container className="mt-4">
       <h4 className="mt-4">Comments</h4>
-      <AddCommentForm />
+      <AddCommentForm article_id={article_id} addNewComment={addNewComment} />
       {comments.length > 0 ? (
         comments.map((comment) => (
           <Card key={comment.comment_id} className="mt-3">

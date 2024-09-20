@@ -9,7 +9,7 @@ function Header() {
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container className="d-flex gap-5 flex-row align-items-start justify-content-center ">
         <Link to="/" className="btn btn-dark btn-lg">
-          news
+          Home
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -17,14 +17,20 @@ function Header() {
             <Link to="/" className="btn btn-dark ">
               News
             </Link>
-
-            <Link to="/articles/:articles_id" className="btn btn-dark">
-              Profile
+            <Link to="/cooking" className="btn btn-dark">
+              Cooking Articles
             </Link>
-            <Link to="/user" className="btn btn-primary">
-              log in
+
+            <Link to="/Football" className="btn btn-dark">
+              Football Articles
+            </Link>
+            <Link to="/Coding" className="btn btn-dark">
+              Coding Articles
             </Link>
           </Nav>
+          <Link to="/Coding" className="btn btn-dark">
+            log In
+          </Link>
         </Navbar.Collapse>
       </Container>
     </Navbar>
