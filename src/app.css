@@ -1,0 +1,197 @@
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: #242525;
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+  color: #242525;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.navbar {
+  background-color: #242525;
+}
+
+.navbar .btn {
+  background-color: #fff;
+  color: #242525;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  margin-left: 10px;
+}
+
+.navbar .btn:hover {
+  background-color: #242525;
+  color: white;
+}
+.articles-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+  border: none;
+  width: 100%;
+  max-width: 300px;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-title {
+  font-size: 1.3rem;
+  color: #333;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #555;
+}
+
+.card-footer {
+  background-color: #f8f9fa;
+  border-top: none;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.card img {
+  border-radius: 12px 12px 0 0;
+  object-fit: cover;
+  height: 200px;
+}
+
+.spinner-border {
+  display: block;
+  margin: 20px auto;
+}
+
+.btn {
+  background-color: #242525;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #242525;
+}
+
+.comment-section {
+  background-color: #f0f2f5;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.comment-card {
+  margin-bottom: 10px;
+}
+
+.comment-card .card-body {
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.comment-text {
+  font-size: 1rem;
+  color: #555;
+}
+
+.comment-footer {
+  color: #888;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.vote-button {
+  background-color: #242525;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.vote-button:hover {
+  background-color: #242525;
+}
+
+footer {
+  background-color: #f8f9fa;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+footer a {
+  color: #242525;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+#deletebtn {
+  background-color: rgba(163, 41, 41, 0.884);
+}
+#bigcard {
+  min-height: 500px;
+  min-width: 400px;
+  max-width: 800px;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: transform 0.2s ease-in-out;
+}
+
+#bigcard img {
+  min-height: 500px;
+  min-width: 400px;
+  max-width: 800px;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: transform 0.2s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .navbar .btn {
+    font-size: 1rem;
+  }
+
+  .card {
+    max-width: 100%;
+  }
+}

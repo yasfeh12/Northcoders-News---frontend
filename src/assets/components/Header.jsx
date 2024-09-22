@@ -28,7 +28,7 @@ function Header() {
               Coding Articles
             </Link>
           </Nav>
-          <Link to="/Coding" className="btn btn-dark">
+          <Link to="/login" className="btn btn-dark">
             log In
           </Link>
         </Navbar.Collapse>

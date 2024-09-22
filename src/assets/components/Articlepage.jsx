@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Spinner from "react-bootstrap/Spinner";
-
+import Alert from "react-bootstrap/Alert";
 const Articlepage = () => {
   const { articles_id } = useParams();
   const [article, setArticle] = useState(null);
@@ -15,11 +15,18 @@ const Articlepage = () => {
   useEffect(() => {
     getArticleById(articles_id)
       .then((data) => {
+        if (!data) {
+          throw { response: { status: 404, message: "Article not found" } };
+        }
         setArticle(data);
         setLoading(false);
       })
       .catch((err) => {
-        setError(err);
+        if (err.response && err.response.status === 404) {
+          setError("Article not found.");
+        } else {
+          setError("Something went wrong. Please try again later.");
+        }
         setLoading(false);
       });
   }, [articles_id]);
@@ -36,14 +43,16 @@ const Articlepage = () => {
 
   if (error) {
     return (
-      <p className="text-danger">Error fetching the article: {error.message}</p>
+      <Container className="mt-4">
+        <Alert variant="danger">{error}</Alert>
+      </Container>
     );
   }
 
   return (
     <Container className="mt-4">
       {article && (
-        <Card>
+        <Card id="bigcard">
           <Card.Img
             variant="top"
             src={article.article_img_url}

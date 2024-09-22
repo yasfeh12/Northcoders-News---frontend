@@ -3,6 +3,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ListOfRoutes from "./assets/components/ListOfRoutes";
 import ErrorBoundary from "./assets/components/Errorboundaries";
+import "./app.css";
 
 function App() {
   return (
