@@ -88,6 +88,7 @@ const CommentSection = ({ article_id }) => {
               {comment.author === loggedInUser && (
                 <Button
                   variant="danger"
+                  id="deletebtn"
                   className="mt-2"
                   disabled={isDeleting}
                   onClick={() => handleDeleteComment(comment.comment_id)}

@@ -6,6 +6,8 @@ import ProfilePage from "./ProfilePage";
 import CookingArticles from "./CookingArticles";
 import FootballArticles from "./FootballArticles";
 import CodingArticles from "./CodingArticles";
+import Loginpage from "./Loginpage";
+import NotFound from "./Notfound";
 function ListOfRoutes() {
   return (
     <Routes>
@@ -19,6 +21,8 @@ function ListOfRoutes() {
       <Route path="/cooking" element={<CookingArticles />} />
       <Route path="/Football" element={<FootballArticles />} />
       <Route path="/Coding" element={<CodingArticles />} />
+      <Route path="/login" element={<Loginpage />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
